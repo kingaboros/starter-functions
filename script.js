@@ -277,4 +277,68 @@ const poll = {
   // This generates [0, 0, 0, 0]. More in the next section!
   answers: new Array(4).fill(0),
 }
+
+////// Immediately invoked function expression (IIFE)
+
+const runOnce = function () {
+  console.log('This will never run again');
+};
+
+// runOnce();
+
+//this is how we write an IIFE
+
+(function () {
+  console.log('This will never run again');
+  const isPrivate = 23; // inner scope
+})();
+
+// console.log(isPrivate); // it won't work because it's insite fe IIFE
+
+(() => console.log('This will never run again'))();
+
+{
+  const isPrivate = 23; // this one wouldn't be accessible from the Global scope
+  var notPrivate = 46; // variables created with var are accessible on a Global scope in this case
+}
+
+// console.log(isPrivate);
+console.log(notPrivate);
+
+
+
+//////// Closures /////////
+
+const secureBooking = function () {
+  let passagengerCount = 0;
+  
+  return function () {
+    passagengerCount++;
+    console.log(`${passagengerCount} passangers`);
+  };
+};
+
+const booker = secureBooking();
+
+booker();
+booker();
+booker();
+
+// console.dir(booker);
+
+
+// more closure examples
+
+let f;
+
+const g = function () {
+  const a = 23;
+  f = function () {
+    console.log(a * 2);
+  };
+};
+
+g();
+f();
+
 */
